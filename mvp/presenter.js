@@ -19,7 +19,8 @@ class Presenter {
         this.update();
     }
 
-    removeNumber(number) {
+    removeNumber(numberStr) {
+        const number = parseInt(numberStr);
         this.model.remove(number);
         this.update();
     }
