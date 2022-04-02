@@ -13,7 +13,9 @@
 <body>
     <div id="app">
         <h3>Tøffe tall</h3>
-        Summen er {{sum}}
+        <div>
+            Summen er {{sum}}            
+        </div>
         <ul v-for="(n,i) in numbers">
             <li>{{n}} <button @click="removeButtonClick(i)">x</button></li>
         </ul>
@@ -22,6 +24,7 @@
     </div>
     <script>
         const model = new Model();
+
         const app = new Vue({
             el: '#app',
             data: {
@@ -31,10 +34,13 @@
             },
             methods: {
                 addButtonClick() {
-                    model.add(this.inputNumber);
+                    model.add(parseInt(this.inputNumber));
+                    this.inputNumber = null;
+                    this.updateNumbers();
                 },
                 removeButtonClick(index) {
                     model.remove(this.numbers[index]);
+                    this.updateNumbers();
                 },
                 updateNumbers() {
                     this.numbers.length = 0;
