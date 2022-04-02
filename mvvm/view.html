@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="model.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>Tøffe tall</h3>
+        Summen er {{sum}}
+        <ul v-for="(n,i) in numbers">
+            <li>{{n}} <button @click="removeButtonClick(i)">x</button></li>
+        </ul>
+        <input type="number" v-model="inputNumber" />
+        <button @click="addButtonClick">Legg til tall</button>
+    </div>
+    <script>
+        const model = new Model();
+        const app = new Vue({
+            el: '#app',
+            data: {
+                inputNumber: null,
+                sum: null,
+                numbers: [],
+            },
+            methods: {
+                addButtonClick() {
+                    model.add(this.inputNumber);
+                },
+                removeButtonClick(index) {
+                    model.remove(this.numbers[index]);
+                },
+                updateNumbers() {
+                    this.numbers.length = 0;
+                    this.numbers.push(...model.getNumbers());
+                    this.sum = model.getSum();
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
