@@ -28,12 +28,13 @@ class View {
         const addBtn = buttons.pop();
         addBtn.onclick = this.addButtonClick.bind(this);
         for(let btn of buttons){
-            buttons.onclick = this.removeButtonClick.bind(this);
+            btn.onclick = this.removeButtonClick.bind(this);
         }
     }
 
-    inputChangeValue() {
-        this.presenter.updateInputNumber(myInput.valueAsNumber);
+    inputChangeValue(event) {
+        const input = event.srcElement;
+        this.presenter.updateInputNumber(input.valueAsNumber);
     }
 
     addButtonClick() {
