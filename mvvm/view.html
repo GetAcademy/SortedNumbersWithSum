@@ -22,17 +22,21 @@
         <input type="number" v-model="inputNumber" />
         <button @click="addButtonClick">Legg til tall</button>
     </div>
+
     <script>
         const model = new Model();
 
         const app = new Vue({
             el: '#app',
-            data: {
+            data: { 
+                // Dette objektet er ViewModel-en
+                // this i metodene under viser til dette objektet
                 inputNumber: null,
                 sum: null,
                 numbers: [],
             },
             methods: {
+                // Dette blir litt som en presenter, men vi må også se dette som en del av ViewModel
                 addButtonClick() {
                     model.add(parseInt(this.inputNumber));
                     this.inputNumber = null;
@@ -43,6 +47,7 @@
                     this.updateNumbers();
                 },
                 updateNumbers() {
+                    // Man må ikke gjøre this.number = [], for det vil bryte reaktiviteten
                     this.numbers.length = 0;
                     this.numbers.push(...model.getNumbers());
                     this.sum = model.getSum();
